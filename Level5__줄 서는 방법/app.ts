@@ -15,8 +15,8 @@ N명의 사람이 있을 때, N명의 사람을 서로 다른 방법으로 줄�
 예를 들어 setAlign(3,5)를 입력받는다면 [3,1,2]를 리턴해주면 됩니다.
 */
 
-const setAlign: Function = (n, k): Array<number> => {
-    let result = [];
+const setAlign: Function = (n: number, k: number): Array<number> => {
+    let result: Array<number> = [];
     return result;
 }
 
