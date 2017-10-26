@@ -9,22 +9,20 @@ function Rectangle(v){
     let arrTemp = [[],[]];
     let arrSort = [[],[]];
     let arrOverlap = [];
-    let result = [];
-    for(let i=0; i<2; i++){
-        v.map(v => {
-            arrTemp[i].push(v[i]);
-        });
-        arrSort[i] = arrTemp[i].sort((a, b) => {
-            return a- b;
-        });
+
+    for(let i=0; i < arrSort.length; i++){
+        v.map(v => arrTemp[i].push(v[i]));
+        arrSort[i] = arrTemp[i].sort((a, b) => a - b);
         arrSort[i].reduce((b, c, index, arr) => {
             if(arr[index] === arr[index+1]) arrOverlap.push(arr[index]);
         }, []);
         arrSort[i].splice(arrSort[i].indexOf(arrOverlap[i]), 2);
     }
-    result = arrSort[0].concat(arrSort[1]);
-    return result;
+    return arrSort[0].concat(arrSort[1]);
 }
 
 const arr = [[3, 4],[1, 4],[3, 10]];
 console.log(Rectangle(arr));
+
+const arr2 = [[1, 10],[1, 4],[3, 10]];
+console.log(Rectangle(arr2));
