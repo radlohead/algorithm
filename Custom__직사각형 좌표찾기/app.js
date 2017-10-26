@@ -6,12 +6,12 @@
 */
 
 function Rectangle(v){
-    let arrTemp = [[],[]];
-    let arrSort = [[],[]];
+    let arrTemp = [];
+    let arrSort = [];
     let arrOverlap = [];
 
-    for(let i=0; i < arrSort.length; i++){
-        v.map(v => arrTemp[i].push(v[i]));
+    for(let i=0; i < 2; i++){
+        arrTemp[i] = v.map(v => v[i]);
         arrSort[i] = arrTemp[i].sort((a, b) => a - b);
         arrSort[i].reduce((b, c, index, arr) => {
             if(arr[index] === arr[index+1]) arrOverlap.push(arr[index]);
