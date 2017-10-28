@@ -16,9 +16,21 @@ N명의 사람이 있을 때, N명의 사람을 서로 다른 방법으로 줄�
 */
 
 const setAlign: Function = (n: number, k: number): Array<number> => {
-    let result: Array<number> = [];
-    return result;
-}
+    let arrReal: Array<number> = [];
+    let result: Array<Array<number>> = [];
+
+    for(let i=1; i<=n; i++) arrReal.push(i);
+    let arrFake = (<any>Object).assign([], arrReal);
+    for(let i: number=arrFake.length; i>1; i--){
+        const num: number = arrFake.reduce((b, c)=> b * c);
+        result.push(arrReal.splice((Math.ceil(k / (num / arrFake.length)) - 1) % arrFake.length, 1));
+        arrFake.pop();
+    }
+    result.push(arrReal);
+    return result.map((v: Array<number>): number => {
+        return v[0];
+    });
+};
 
 // 아래는 테스트로 출력해 보기 위한 코드입니다.
-console.log(setAlign(4, 5));
+console.log(setAlign(3, 5));

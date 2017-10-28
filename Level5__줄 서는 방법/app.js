@@ -15,8 +15,20 @@ N명의 사람이 있을 때, N명의 사람을 서로 다른 방법으로 줄�
 예를 들어 setAlign(3,5)를 입력받는다면 [3,1,2]를 리턴해주면 됩니다.
 */
 var setAlign = function (n, k) {
+    var arrReal = [];
     var result = [];
-    return result;
+    for (var i = 1; i <= n; i++)
+        arrReal.push(i);
+    var arrFake = Object.assign([], arrReal);
+    for (var i = arrFake.length; i > 1; i--) {
+        var num = arrFake.reduce(function (b, c) { return b * c; });
+        result.push(arrReal.splice((Math.ceil(k / (num / arrFake.length)) - 1) % arrFake.length, 1));
+        arrFake.pop();
+    }
+    result.push(arrReal);
+    return result.map(function (v) {
+        return v[0];
+    });
 };
 // 아래는 테스트로 출력해 보기 위한 코드입니다.
-console.log(setAlign(4, 5));
+console.log(setAlign(3, 5));
