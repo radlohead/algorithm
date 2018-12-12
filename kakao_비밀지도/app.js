@@ -17,11 +17,15 @@
 // arr2	[30, 1, 21, 17, 28]
 // 출력	["#####","# # #", "### #", "# ##", "#####"]
 function main(n, arr1, arr2) {
-    var result = [];
+    var arr = [];
+    var result = "";
     for (var i = 0; i < n; i++) {
-        result.push((arr1[i] | arr2[i]).toString(2).replace(/1/g, '#').replace(/0/g, ' '));
+        arr.push((arr1[i] | arr2[i]).toString(2).replace(/1/g, '#').replace(/0/g, ' '));
     }
-    return result;
+    for (var j = 0; j < n; j++) {
+        result += arr[j] + "\n";
+    }
+    return result.trim();
 }
 var n = 5;
 var arr1 = [9, 20, 28, 18, 11];

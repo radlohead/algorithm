@@ -21,14 +21,18 @@
 // arr2	[30, 1, 21, 17, 28]
 // 출력	["#####","# # #", "### #", "# ##", "#####"]
 
-function main(n: number, arr1: Array<number>, arr2: Array<number>) {
-    let result: Array<string> = [];
+function main(n: number, arr1: Array<number>, arr2: Array<number>): string {
+    let arr: Array<string> = [];
+    let result: string = "";
 
     for(let i: number=0; i<n; i++){
-        result.push((arr1[i] | arr2[i]).toString(2).replace(/1/g, '#').replace(/0/g, ' '));
+        arr.push((arr1[i] | arr2[i]).toString(2).replace(/1/g, '#').replace(/0/g, ' '));
     }
-    
-    return result;
+
+    for(let j: number=0; j<n; j++){
+        result += `${arr[j]}\n`;
+    }
+    return result.trim();
 }
 
 const n: number = 5;
