@@ -20,15 +20,14 @@
 function solution(array, commands) {
     var result = [];
     var temp = [];
-    for (var i = 0; i < commands.length; i++) {
-        var k = commands[i][2] - 1;
-        temp[i] = [];
-        for (var j = commands[i][0] - 1; j < commands[i][1]; j++) {
-            temp[i].push(array[j]);
-            temp[i].sort();
+    commands.forEach(function (v, index) {
+        temp[index] = [];
+        for (var i = v[0] - 1, j = v[1] - 1; i <= j; i++) {
+            temp[index].push(array[i]);
+            temp[index].sort();
         }
-        result.push(temp[i][k]);
-    }
+        result.push(temp[index][(v[2] - 1)]);
+    });
     return result;
 }
 var array = [1, 5, 2, 6, 3, 7, 4];

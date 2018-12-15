@@ -23,16 +23,14 @@ function solution(array: number[], commands: number[][]): number[] {
     const result: number[] = [];
     const temp: number[][] = [];
 
-    for(let i: number=0; i<commands.length; i++){
-        let k: number=commands[i][2]-1;
-        temp[i] = [];
-
-        for(let j: number=commands[i][0]-1; j<commands[i][1]; j++){
-            temp[i].push(array[j]);
-            temp[i].sort();
+    commands.forEach((v: number[], index: number): void => {
+        temp[index] = [];
+        for(let i:number=v[0]-1, j:number=v[1]-1; i<=j; i++) {
+            temp[index].push(array[i]);
+            temp[index].sort();
         }
-        result.push(temp[i][k]);
-    }
+        result.push(temp[index][(v[2]-1)]);        
+    });
     return result;
 }
 
