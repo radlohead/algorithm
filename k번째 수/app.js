@@ -20,14 +20,18 @@
 function solution(array, commands) {
     var result = [];
     var temp = [];
-    commands.forEach(function (v, index) {
-        temp[index] = [];
-        for (var i = v[0] - 1, j = v[1] - 1; i <= j; i++) {
-            temp[index].push(array[i]);
-            temp[index].sort();
-        }
-        result.push(temp[index][(v[2] - 1)]);
+    // commands.forEach((v: number[], index: number): void => {
+    //     temp[index] = [];
+    //     for(let i:number=v[0]-1, j:number=v[1]-1; i<=j; i++) {
+    //         temp[index].push(array[i]);
+    //         temp[index].sort();
+    //     }
+    //     result.push(temp[index][(v[2]-1)]);        
+    // });
+    var a = commands.map(function (v) {
+        return array.slice(v[0] - 1, v[1]).sort(function (a, b) { return a - b; })[v[2] - 1];
     });
+    console.log(a);
     return result;
 }
 var array = [1, 5, 2, 6, 3, 7, 4];
