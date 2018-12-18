@@ -15,25 +15,21 @@
 // [1,3,2,4,2]	[1,2,3]
 
 
-const solution = (answers: number[]):number[] => {
+const solution = (answers: number[]): number[] => {
     const answer: number[] = [];
-    const arr1: number[] = [1,2,3,4,5];
-    const arr2: number[] = [2, 1, 2, 3, 2, 4, 2, 5];
-    const arr3: number[] = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5];
-
-    const arr1Answer: number[] = answers.filter((v: number, i: number): boolean => {
-        return v === arr1[i];
+    const arr1: number[] = answers.filter((v: number, i: number): boolean => {
+        return v === [1,2,3,4,5][i % 5];
     });
 
-    const arr2Answer: number[] = answers.filter((v: number, i: number): boolean => {
-        return v === arr2[i];
+    const arr2: number[] = answers.filter((v: number, i: number): boolean => {
+        return v === [2, 1, 2, 3, 2, 4, 2, 5][i % 8];
     });
 
-    const arr3Answer: number[] = answers.filter((v: number, i: number): boolean => {
-        return v === arr3[i];
+    const arr3: number[] = answers.filter((v: number, i: number): boolean => {
+        return v === [3, 3, 1, 1, 2, 2, 4, 4, 5, 5][i % 10];
     });
 
-    const arrAnswerLen: number[] = [arr1Answer.length, arr2Answer.length, arr3Answer.length];
+    const arrAnswerLen: number[] = [arr1.length, arr2.length, arr3.length];
     const maxNum: number = Math.max.apply(null, arrAnswerLen);
 
     arrAnswerLen.filter((v: number, i: number): number[] => {
@@ -44,9 +40,8 @@ const solution = (answers: number[]):number[] => {
         return answer;
     })
 
-    console.log(answer);
     return answer;
 }
 
-const arr: number[] = [1,3,2,4,2];
+const arr: number[] = [1,3,2,4,2,1,3,2,4,2,1,3,2,4,2];
 solution(arr);

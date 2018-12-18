@@ -14,19 +14,16 @@
 // [1,3,2,4,2]	[1,2,3]
 var solution = function (answers) {
     var answer = [];
-    var arr1 = [1, 2, 3, 4, 5];
-    var arr2 = [2, 1, 2, 3, 2, 4, 2, 5];
-    var arr3 = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5];
-    var arr1Answer = answers.filter(function (v, i) {
-        return v === arr1[i];
+    var arr1 = answers.filter(function (v, i) {
+        return v === [1, 2, 3, 4, 5][i % 5];
     });
-    var arr2Answer = answers.filter(function (v, i) {
-        return v === arr2[i];
+    var arr2 = answers.filter(function (v, i) {
+        return v === [2, 1, 2, 3, 2, 4, 2, 5][i % 8];
     });
-    var arr3Answer = answers.filter(function (v, i) {
-        return v === arr3[i];
+    var arr3 = answers.filter(function (v, i) {
+        return v === [3, 3, 1, 1, 2, 2, 4, 4, 5, 5][i % 10];
     });
-    var arrAnswerLen = [arr1Answer.length, arr2Answer.length, arr3Answer.length];
+    var arrAnswerLen = [arr1.length, arr2.length, arr3.length];
     var maxNum = Math.max.apply(null, arrAnswerLen);
     arrAnswerLen.filter(function (v, i) {
         if (v >= maxNum) {
@@ -34,8 +31,7 @@ var solution = function (answers) {
         }
         return answer;
     });
-    console.log(answer);
     return answer;
 };
-var arr = [1, 3, 2, 4, 2];
+var arr = [1, 3, 2, 4, 2, 1, 3, 2, 4, 2, 1, 3, 2, 4, 2];
 solution(arr);
