@@ -14,32 +14,29 @@
 // [1,2,3,4,5]	[1]
 // [1,3,2,4,2]	[1,2,3]
 
-
 const solution = (answers: number[]): number[] => {
     const answer: number[] = [];
-    const arr1: number[] = answers.filter((v: number, i: number): boolean => {
+    const arr1Len: number = answers.filter((v: number, i: number): boolean => {
         return v === [1,2,3,4,5][i % 5];
-    });
+    }).length;
 
-    const arr2: number[] = answers.filter((v: number, i: number): boolean => {
+    const arr2Len: number = answers.filter((v: number, i: number): boolean => {
         return v === [2, 1, 2, 3, 2, 4, 2, 5][i % 8];
-    });
+    }).length;
 
-    const arr3: number[] = answers.filter((v: number, i: number): boolean => {
+    const arr3Len: number = answers.filter((v: number, i: number): boolean => {
         return v === [3, 3, 1, 1, 2, 2, 4, 4, 5, 5][i % 10];
-    });
+    }).length;
 
-    const arrAnswerLen: number[] = [arr1.length, arr2.length, arr3.length];
+    const arrAnswerLen: number[] = [arr1Len, arr2Len, arr3Len];
     const maxNum: number = Math.max.apply(null, arrAnswerLen);
 
-    arrAnswerLen.filter((v: number, i: number): number[] => {
+    arrAnswerLen.map((v: number, i: number): number[] => {
         if (v >= maxNum) {
             answer.push(i+1);
         }
-
         return answer;
-    })
-
+    });
     return answer;
 }
 
