@@ -14,20 +14,22 @@
 // [1,3,2,4,2]	[1,2,3]
 var solution = function (answers) {
     var answer = [];
-    var arr1Len = answers.filter(function (v, i) {
+    answer.push(answers.filter(function (v, i) {
         return v === [1, 2, 3, 4, 5][i % 5];
-    }).length;
-    var arr2Len = answers.filter(function (v, i) {
+    }).length);
+    answer.push(answers.filter(function (v, i) {
         return v === [2, 1, 2, 3, 2, 4, 2, 5][i % 8];
-    }).length;
-    var arr3Len = answers.filter(function (v, i) {
+    }).length);
+    answer.push(answers.filter(function (v, i) {
         return v === [3, 3, 1, 1, 2, 2, 4, 4, 5, 5][i % 10];
-    }).length;
-    var arrAnswerLen = [arr1Len, arr2Len, arr3Len];
-    var maxNum = Math.max.apply(null, arrAnswerLen);
-    arrAnswerLen.map(function (v, i) {
+    }).length);
+    var maxNum = Math.max.apply(null, answer);
+    answer.map(function (v, i) {
         if (v >= maxNum) {
             answer.push(i + 1);
+        }
+        if (i === 2) {
+            answer = answer.splice(i + 1, answer.length - (i + 1));
         }
         return answer;
     });
