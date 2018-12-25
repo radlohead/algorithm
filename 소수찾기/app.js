@@ -27,6 +27,7 @@ function solution(answer) {
             }
         }
     }
+    console.log(decimal);
 }
 var str = "12345678910";
 solution(str);

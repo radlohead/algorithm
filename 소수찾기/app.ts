@@ -33,6 +33,8 @@ function solution(answer) {
             }
         }
     }
+
+    console.log(decimal);
 }
 
 const str: string = "12345678910";
