@@ -22,7 +22,7 @@
 // 따라서 7일째에 2개의 기능, 9일째에 1개의 기능이 배포됩니다.
 
 function solution(progress: number[], speed: number[]) {
-    const arr: number[] = [];
+    let arr: number[] = [];
     const result: number[] = [];
 
     progress.map((v: number, i: number): void => {
@@ -35,20 +35,27 @@ function solution(progress: number[], speed: number[]) {
     });
 
     let count: number = 1;
-    let temp: number = 0;    
-    arr.map((v: number, i: number, arr: number[]): void => {
-        if (!(arr.length-1 === i) && temp) {
-            result.push(i);
-        }
+    let index: number = 0;
+    const arr2: number[] = arr.slice();
 
-        if (arr[i] > arr[i+1]) {
-            result[i] = ++count;
-            result.slice(i+1, 1);
-            temp = i+1;
+    for (let i=0; i<arr2.length; i++) {
+        if (arr[0] > arr[1]) {
+            result[index] = ++count;
+            arr.splice(1, 1);
         } else {
+            if (count > 1) {
+                arr.splice(0, 1);
+            }
+
+            if (count === 1) {
+                result[index] = count;
+                arr.splice(0,1);
+            }
+
             count = 1;
+            ++index;
         }
-    });
+    }
 
     return result;
 }

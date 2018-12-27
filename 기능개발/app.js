@@ -29,20 +29,25 @@ function solution(progress, speed) {
         }
     });
     var count = 1;
-    var temp = 0;
-    arr.map(function (v, i, arr) {
-        if (!(arr.length - 1 === i) && temp) {
-            result.push(i);
-        }
-        if (arr[i] > arr[i + 1]) {
-            result[i] = ++count;
-            result.slice(i + 1, 1);
-            temp = i + 1;
+    var index = 0;
+    var arr2 = arr.slice();
+    for (var i = 0; i < arr2.length; i++) {
+        if (arr[0] > arr[1]) {
+            result[index] = ++count;
+            arr.splice(1, 1);
         }
         else {
+            if (count > 1) {
+                arr.splice(0, 1);
+            }
+            if (count === 1) {
+                result[index] = count;
+                arr.splice(0, 1);
+            }
             count = 1;
+            ++index;
         }
-    });
+    }
     return result;
 }
 var progress = [93, 30, 55];
