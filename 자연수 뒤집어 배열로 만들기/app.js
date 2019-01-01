@@ -10,4 +10,4 @@ function solution(n) {
     return Number(n.toString().split('').sort(function (a, b) { return Number(b) - Number(a); }).join(''));
 }
 var num = 12345;
-console.log(solution(num));
+solution(num);

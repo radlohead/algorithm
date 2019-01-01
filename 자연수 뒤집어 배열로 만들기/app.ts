@@ -14,4 +14,4 @@ function solution(n: number): number {
 }
 
 const num: number = 12345;
-console.log(solution(num));
+solution(num);
