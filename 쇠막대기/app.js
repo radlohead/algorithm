@@ -43,26 +43,24 @@
 function solution(arg) {
     let result = 0;
     let temp = [];
-    let tempArr = arg.split('');
+    let arr = arg.replace(/\(\)/g, 0).split('');
 
-    while(tempArr.length > 0) {
-        if (tempArr[0] + tempArr[1] === '()') {
-            result += temp.length;
-            tempArr.shift();
-            tempArr.shift();
-        }
-        
-        if (tempArr[0] + tempArr[1] !== '()' && tempArr[0] === '(') {
-            temp.push(tempArr[0]);
-            tempArr.shift();
-        }
-        
-        if (tempArr[0] + tempArr[1] !== '()' && tempArr[0] === ')') {
-            temp.pop();
-            tempArr.shift();
-            ++result;
+    for(let i=0; i<arr.length; i++) {
+        switch(arr[i]) {
+            case '0':
+                result += temp.length;
+                break;
+            case '(':
+                temp.push(1);
+                break;
+            case ')':
+                temp.pop();
+                ++result;
+                break;
         }
     }
+
+    return result;
 }
 
 solution("()(((()())(())()))(())");
