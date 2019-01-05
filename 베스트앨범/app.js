@@ -63,20 +63,18 @@ function solution(genres, plays) {
 
     temp = result;
     result = [];
+    ranking = [];
     
-    temp.forEach((v ,i) => {
+    temp.forEach(v => {
         result = result.concat(v);
     });
-
-    ranking = [];
-    result.slice(0, 4).findIndex((v, i) => {
-        plays.forEach((a, j) => {
-            if (v === a) {
-                ranking.push(j);
-            }
+    
+    result.slice(0, 4).findIndex(v => {
+        plays.forEach((a, i) => {
+            if (v === a) ranking.push(i);
         });
     });
-
+    
     return ranking;
 }
 
