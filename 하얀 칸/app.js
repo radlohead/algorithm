@@ -10,16 +10,17 @@
 const solution = (arg) => {
     const tempArr = arg.replace(/\n/g, '');
     const argIndex = arg.match(/\n/g).length;
+    const rowCount = arg.indexOf('\n');
     let arr = [];
     let result = 0;
 
     for (let i=0; i<=argIndex; i++) {
         arr[i]=[];
-        arr[i].push(tempArr.slice(i*8, (i+1)*8));
+        arr[i].push(tempArr.slice(i*rowCount, (i+1)*rowCount));
     }
 
     for (let i=0; i<arr.length; i++) {
-        arr[i].forEach((a, j) => {
+        arr[i].forEach(a => {
             if (i % 2) {
                 for (let k=1; k<=arr.length; k+=2) {
                     if (a.split('')[k] === 'F') ++result;
