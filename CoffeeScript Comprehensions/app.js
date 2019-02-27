@@ -28,7 +28,7 @@ const solution = (people, num) => {
                 p.push(c.firstName);
                 return p;
             }, [])
-    )
+    );
 }
 
 people = [
