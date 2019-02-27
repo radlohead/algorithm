@@ -16,12 +16,15 @@ const solution = (fullText, searchText, allowOverlap) => {
     
     if(!searchText.length) return 0;
     while(fullTextLength >= searchTextLength) {
-        if(fullText.substring(fullTextLength - searchTextLength, fullTextLength) === searchText) {
-            if(allowOverlap !== false) ++result;
+        if(fullText.includes(searchText) && allowOverlap === false) {
             fullText = fullText.replace(searchText, '');
             ++result;
         }
-        fullTextLength--;
+        if(fullText.substring(fullTextLength - searchTextLength, fullTextLength) === searchText 
+            && allowOverlap !== false) {
+            ++result;
+        }
+        --fullTextLength;
     }
     
     return result;
