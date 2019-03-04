@@ -1,0 +1,23 @@
+{
+  "name": "algorithm",
+  "version": "1.0.0",
+  "description": "알고리즘",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radlohead/algorithm.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/radlohead/algorithm/issues"
+  },
+  "homepage": "https://github.com/radlohead/algorithm#readme",
+  "devDependencies": {
+    "jest": "^24.1.0"
+  }
+}

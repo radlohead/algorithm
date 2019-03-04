@@ -14,8 +14,8 @@ const bsRecur = (arg, first, last, target) => {
 const solution = (arg, target) => {
     let index = bsRecur(arg, 0, arg.length - 1, target);
 
-    if(index === -1) log('이진탐색 실패');
-    else log(`이진탐색 성공 ${index}`);
+    if(index === -1) return false;
+    else return index;
 }
 
-solution([2, 5, 10, 14, 21, 34], 5);
+module.exports = solution;
