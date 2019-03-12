@@ -12,6 +12,7 @@
 
 const solution = (arr) => {
     let result = [];
+    let temp = [];
 
     const swap = (arr, i, j) => {
         const temp = arr[i];
@@ -34,21 +35,26 @@ const solution = (arr) => {
 
     perm(arr, 0, arr.length);
 
-    const res = result
-        .sort((a, b) => b - a)[0];
-    let temp = [];
-    arr.sort((a, b) => b - a).map((v, i) => {
-        const index = res.toString().indexOf(v.toString());
-        temp.push(res.toString().substr(index, v.toString().length));
+    const resultSort = result.sort((a, b) => b - a)[0];
+    arr
+        .sort((a, b) => b - a)
+        .forEach(v => {
+            const resultSortToStr = resultSort.toString();
+            const eleToStr = v.toString();
+            const index = resultSortToStr.indexOf(eleToStr);
+
+            result.push(resultSortToStr.substr(index, eleToStr.length));
+        });
+    result.forEach(v => {
+        const resultSortToStr = resultSort.toString();
+        const index = resultSortToStr.indexOf(v);
+
+        temp[index] = resultSortToStr.substr(index, v.length);
     });
-    let tem = [];
-    temp.map((v, i) => {
-        const index = res.toString().indexOf(v);
-        tem[index] = res.toString().substr(index, v.length);
-    });
-    result = [...tem]
+    result = [...temp]
         .filter(v => 'string' === typeof v )
         .map(v => Number(v));
+
     return result;
 }
 
