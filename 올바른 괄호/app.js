@@ -23,24 +23,17 @@
 
 const solution = (s) => {
     const bracket = ['(', ')'];
-    let bracketTemp = [[],[]];
+    let bracketTemp = [];
     let answer = true;
 
+    bracket.forEach(v => bracketTemp.push([]));
     s.split('').forEach((v, i) => {
         if(v === bracket[0]) bracketTemp[0].push(i);
         else bracketTemp[1].push(i);
     });
 
     if(bracketTemp[0].length !== bracketTemp[1].length) return false;
-    bracketTemp[0].forEach((v, i) => {
-        if(v > bracketTemp[1][i]) {
-            answer = false;
-            return;
-        }
-        else {
-            if(bracketTemp[0].length + bracketTemp[1].length === s.length) return true;
-        }
-    });
+    answer = bracketTemp[0].every((v, i) => v <= bracketTemp[1][i]);
     return answer;
 }
 
