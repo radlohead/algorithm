@@ -15,14 +15,19 @@
 const solution = (arg) => {
     const minCharLength = arg.map(v => v.length).sort((a, b) => a - b)[0];
     const targetChar = arg.filter(v => v.length === minCharLength)[0];
-    const restArg = arg.filter(v => v !== targetChar);
-    const result = restArg.map(v => {
-        const duplicateCharList = v.match(new RegExp(`[${targetChar}]`, 'g'));
+    const restCharList = arg.filter(v => v !== targetChar);
+    
+    if (!arg.length) return '';
+    if (arg.length === 1 || !restCharList.length) return arg[0];
 
+    let result = restCharList.map(v => {
+        const duplicateCharList = v.match(new RegExp(`[${targetChar}]`, 'g'));
         if (!duplicateCharList) return;
         return duplicateCharList.join('');
-    }).sort()[0] || '';
-    
+    });
+    if (!result.every(v => v && v)) return '';
+
+    result = result.sort()[0].substr(0, targetChar.length);
     return result;
 }
 
