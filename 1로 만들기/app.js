@@ -21,40 +21,37 @@
 
 // 매번 로직 처음에 -1을 빼는 경우의 수를 계산해서 각각 다른 결과값을  경우의 수만큼 구해야 한다.
 
-const app = n => {
-    let num = Array(2).fill(n)
-    let count = Array(2).fill(0)
+const app = num => {
+    let count = 0
+    let isTerms = false
 
-    while (num[0] > 1) {
-        if (num[0] % 3 === 0) {
-            num[0] = num[0] / 3
-            ++count[0]
-        } else if (num[0] % 2 === 0) {
-            num[0] = num[0] / 2
-            ++count[0]
-        } else {
-            --num[0]
-            ++count[0]
+    const termsWhile = (num, isTerms) => {
+        let temp = 0
+        if (isTerms) {
+            --num
+            ++temp
         }
-    }
-
-    --num[1]
-    ++count[1]
-    while (num[1] > 1) {
-        if (num[1] % 3 === 0) {
-            num[1] = num[1] / 3
-            ++count[1]
-        } else if (num[1] % 2 === 0) {
-            num[1] = num[1] / 2
-            ++count[1]
-        } else {
-            --num[1]
-            ++count[1]
+        while (num > 1) {
+            if (num % 3 === 0) {
+                num = num / 3
+                ++temp
+            } else if (num % 2 === 0) {
+                num = num / 2
+                ++temp
+            } else {
+                --num
+                ++temp
+            }
         }
-    }
 
-    return count.sort()[0]
+        if (count === 0) count = temp
+        if (count > temp) count = temp
+    }
+    termsWhile(num)
+    termsWhile(num, (isTerms = true))
+
+    return count
 }
 
-app(2)
-app(10)
+app(2) // 1
+app(10) // 3
