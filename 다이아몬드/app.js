@@ -27,18 +27,20 @@ const app = n => {
         })
 
     for (let i = 0; i < n; i++) {
-        if (i === 0) star = empty[3].concat(star)
+        if (i === 0) star = empty[midIndex - 1].concat(star)
         if (i !== 0 && i < midIndex) {
             star = star.trim()
             star += '**'
             star = empty[midIndex - (i + 1)].concat(star)
         }
+        if (!(n % 2) && i === midIndex) console.log(star)
         if (i !== 0 && i >= midIndex) {
             star = star.trim()
             star = star.substr(2)
             star = empty[i + 1 - midIndex].concat(star)
         }
-        return star
+        console.log(star)
     }
 }
 app(7)
+app(10)
