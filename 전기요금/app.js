@@ -11,27 +11,75 @@
 // 예시 2 입력 193
 // 출력 135
 
-const app = useKw => {
-    const CONSTANTS = {
-        NUM_100: 100,
-        NUM_200: 200,
-        NUM_300: 300
-    }
-    let result = null
-    if (useKw < CONSTANTS.NUM_100) {
-        result = useKw * 0.5
-    }
-    if (useKw >= CONSTANTS.NUM_100 && useKw < CONSTANTS.NUM_200) {
-        result = useKw * 0.7
-    }
-    if (useKw >= CONSTANTS.NUM_200 && useKw < CONSTANTS.NUM_300) {
-        result = useKw * 0.9
-    }
-    if (useKw >= CONSTANTS.NUM_300) {
-        result = useKw * 1
-    }
-    result = result / 100
-    return result.toFixed(2)
+// const app = useKw => {
+//     const CONSTANTS = {
+//         NUM_100: 100,
+//         NUM_200: 200,
+//         NUM_300: 300
+//     }
+//     let result = null
+//     if (useKw < CONSTANTS.NUM_100) {
+//         result = useKw * 0.5
+//     }
+//     if (useKw >= CONSTANTS.NUM_100 && useKw < CONSTANTS.NUM_200) {
+//         result = useKw * 0.7
+//     }
+//     if (useKw >= CONSTANTS.NUM_200 && useKw < CONSTANTS.NUM_300) {
+//         result = useKw * 0.9
+//     }
+//     if (useKw >= CONSTANTS.NUM_300) {
+//         result = useKw * 1
+//     }
+//     result = result / 100
+//     return result.toFixed(2)
+// }
+
+const CONSTANTS = {
+    NUM_100: 100,
+    NUM_200: 200,
+    NUM_300: 300
 }
-app(100)
-app(193)
+
+class App {
+    constructor(useKw) {
+        ;(this.useKw = useKw), (this.result = null)
+    }
+    useKw100Down() {
+        if (this.useKw < CONSTANTS.NUM_100) {
+            this.result = this.useKw * 0.5
+            return this.result
+        }
+    }
+    useKw100Up200Down() {
+        if (this.useKw >= CONSTANTS.NUM_100 && this.useKw < CONSTANTS.NUM_200) {
+            this.result = this.useKw * 0.7
+            return this.result
+        }
+    }
+    useKw200Up300Down() {
+        if (this.useKw >= CONSTANTS.NUM_200 && this.useKw < CONSTANTS.NUM_300) {
+            this.result = this.useKw * 0.9
+            return this.result
+        }
+    }
+    useKw300Up() {
+        if (this.useKw >= CONSTANTS.NUM_300) {
+            this.result = this.useKw * 1
+            return this.result
+        }
+    }
+    taskAll() {
+        this.useKw100Down()
+        this.useKw100Up200Down()
+        this.useKw200Up300Down()
+        this.useKw300Up()
+    }
+    render() {
+        this.taskAll()
+        return this.result
+    }
+}
+const app1 = new App(100)
+const app2 = new App(193)
+app1.render()
+app2.render()
