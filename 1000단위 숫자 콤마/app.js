@@ -11,7 +11,8 @@
 // 출력 9,876,543,210
 
 const app = num => {
-    const commaCount = Math.ceil(num.toString().length / 3)
+    const UNIT_COUNT = 3
+    const commaCount = Math.ceil(num.toString().length / UNIT_COUNT)
     const reverseNum = num
         .toString()
         .split('')
@@ -21,13 +22,15 @@ const app = num => {
         .fill()
         .map((v, i) => {
             const tempIndex = i + 1
-            return `${reverseNum.substring(i * 3, tempIndex * 3)},`
+            return `${reverseNum.substring(
+                i * UNIT_COUNT,
+                tempIndex * UNIT_COUNT
+            )}${i !== commaCount - 1 ? ',' : ''}`
         })
         .join('')
         .split('')
         .reverse()
         .join('')
-    if (result[0] === ',') result = result.substr(1, result.length)
     return result
 }
 app(1234567) // 1,234,567
