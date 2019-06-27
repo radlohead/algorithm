@@ -14,19 +14,8 @@
 // 출력 -2.00 -2.00
 
 const app = (x, y, op) => {
-    const result = []
-
-    switch (op) {
-        case '+':
-            result.push(x[0] + y[0])
-            result.push(x[1] + y[1])
-            break
-        case '-':
-            result.push(x[0] - y[0])
-            result.push(x[1] - y[1])
-            break
-    }
-    return result.map(v => v.toFixed(2))
+    if (op === '+') return x.map((v, i) => (v + y[i]).toFixed(2))
+    if (op === '-') return x.map((v, i) => (v - y[i]).toFixed(2))
 }
 app([3, 5], [3, 9], '+')
 app([1, 2], [3, 4], '-')
