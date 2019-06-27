@@ -14,17 +14,16 @@
 // 출력 10000
 
 const app = (a, b, n) => {
-    const nArr = Array(b).fill(n)
-    const bSquareCount = nArr.reduce((p, c) => p * c)
-    const betweenCipherCount = b - a
-    const isSameCipher = a === b
+    const bSquareCount = Array(b)
+        .fill(n)
+        .reduce((p, c) => p * c)
     let bSquareCountClone = bSquareCount
 
-    if (isSameCipher) return bSquareCount
+    if (a === b) return bSquareCount
     return (
-        Array(betweenCipherCount)
+        Array(b - a)
             .fill()
-            .map((v, i) => {
+            .map(() => {
                 return (bSquareCountClone /= 10)
             })
             .reduce((p, c) => p + c) + bSquareCount
