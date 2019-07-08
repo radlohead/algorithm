@@ -47,8 +47,12 @@ const app = (cardCount, cardList) => {
     const func = (arg, depth, n) => {
         if (depth === n) {
             arr.push(arg)
-            cardSumArr.push(arr[0][0] + arr[0][1] + arr[0][2])
-            return
+            const cardSumIndex = arr[0]
+                .filter((v, i) => {
+                    if (i < 3) return v
+                })
+                .reduce((p, c) => p + c)
+            cardSumArr.push(cardSumIndex)
         }
         for (let i = depth; i < n; i++) {
             swap(arg, i, depth)
@@ -56,6 +60,7 @@ const app = (cardCount, cardList) => {
         }
     }
     func(arg, depth, n)
+
     const cardSortArr = cardSumArr.sort((a, b) => a - b)
     const isBlackJack = cardSortArr.some(
         v => v === CONSTANT.SUCCESS_SUM_CARD_COUNT
@@ -65,6 +70,6 @@ const app = (cardCount, cardList) => {
     if (isBlackJack) return CONSTANT.SUCCESS_SUM_CARD_COUNT
     else return result
 }
-app(5, [5, 8, 9, 6, 7])
-// app(5, [5, 3, 4, 6, 2])
-// app(8, [5, 1, 7, 8, 3, 4, 6, 2])
+app(5, [5, 8, 9, 6, 7]) // 21
+// app(5, [5, 3, 4, 6, 2])  // 15
+// app(8, [5, 1, 7, 8, 3, 4, 6, 2])  // 21
