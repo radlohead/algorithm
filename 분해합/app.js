@@ -22,7 +22,7 @@ const app = num => {
     const result = []
     let numCopy = num
 
-    while (numCopy-- > 0) {
+    const callbackFunc = numCopy => {
         const numEachSum = Number(
             numCopy
                 .toString()
@@ -33,11 +33,18 @@ const app = num => {
             n: numCopy + numEachSum,
             m: numCopy
         })
+        return result
     }
-    const sameNum = result
-        .filter(v => v.n === num)
-        .map(v => v.m)
-        .sort()[0]
-    return sameNum
+    while (numCopy-- > 0) {
+        if (numCopy > 0) {
+            callbackFunc(numCopy)
+        } else {
+            const sameMinNum = result
+                .filter(v => v.n === num)
+                .map(v => v.m)
+                .sort()[0]
+            return sameMinNum
+        }
+    }
 }
 app(216) // 198
