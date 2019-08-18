@@ -19,5 +19,9 @@
   "homepage": "https://github.com/radlohead/algorithm#readme",
   "devDependencies": {
     "jest": "^24.1.0"
+  },
+  "dependencies": {
+    "global": "^4.4.0",
+    "ts-node": "^8.3.0"
   }
 }
