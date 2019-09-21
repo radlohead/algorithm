@@ -11,6 +11,7 @@ const mix = (...params) => {
         const regex = new RegExp(target, 'g')
         return char.match(regex)
     }
+
     const firstCharDuplicateList = char => {
         const result = []
         const charDuplicateRemoveList = Array.from(new Set(char))
@@ -21,22 +22,18 @@ const mix = (...params) => {
         })
         return result.sort((a, b) => b.length - a.length)
     }
+
     const oneLengthRemoveRestList = char =>
         firstCharDuplicateList(char).filter(list => list.length > 1)
-    const firstDuplicateCharList = oneLengthRemoveRestList(params[0]).map(
-        list => {
-            list.unshift('1:')
+
+    const duplicateCharList = (char, index) =>
+        oneLengthRemoveRestList(char).map(list => {
+            list.unshift(`${index}:`)
             return list
-        }
-    )
-    const lastDuplicateCharList = oneLengthRemoveRestList(params[1]).map(
-        list => {
-            list.unshift('2:')
-            return list
-        }
-    )
-    const result = firstDuplicateCharList
-        .concat(lastDuplicateCharList)
+        })
+
+    const result = duplicateCharList(params[0], 1)
+        .concat(duplicateCharList(params[1], 2))
         .sort((a, b) => b.length - a.length)
         .map(v => v.join(''))
         .join('/')
