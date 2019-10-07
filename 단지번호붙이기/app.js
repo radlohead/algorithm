@@ -125,15 +125,10 @@ const solution = (n, arr) => {
         eachWhile(tempList, n)
     }
 
-    return [result.length, result.map(list => list.length)]
+    return [
+        result.length,
+        result.map(list => list.length).sort((a, b) => a - b)
+    ]
 }
 
-solution(7, [
-    '0110100',
-    '0110101',
-    '1110101',
-    '0000111',
-    '0100000',
-    '0111110',
-    '0111000'
-]) // [ 3, [ 7, 8, 9 ] ]
+module.exports = solution
