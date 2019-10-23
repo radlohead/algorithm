@@ -21,39 +21,52 @@
 // 7,5,-5를 삽입 후 최솟값을 삭제합니다. 최대값 7, 최소값 5를 반환합니다.
 
 const app = arg => {
+    const CONSTANTS = {
+        I: 'I',
+        'D 1': 'D 1',
+        'D -1': 'D -1',
+        MAX: 'max',
+        MIN: 'min'
+    }
     const charList = arg.map(v => {
-        if (v.includes('I')) return 'I'
-        else if (v.includes('D 1')) return 'D 1'
-        else return 'D -1'
+        if (v.includes(CONSTANTS.I)) return CONSTANTS.I
+        else if (v.includes(CONSTANTS['D 1'])) return CONSTANTS['D 1']
+        else return CONSTANTS['D -1']
     })
     const numList = arg.map((v, i) => {
-        if (charList[i] === 'I') return Number(v.replace(/I\s/g, ''))
-        else if (charList[i] === 'D 1') return 'max'
-        else return 'min'
+        if (charList[i] === CONSTANTS.I) return Number(v.replace(/I\s/g, ''))
+        else if (charList[i] === CONSTANTS['D 1']) return CONSTANTS.MAX
+        else return CONSTANTS.MIN
     })
+    const maxMinNum = (arr, type) => {
+        return arr
+            .slice()
+            .sort((a, b) => {
+                if (type === CONSTANTS.MAX) return b - a
+                else return a - b
+            })
+            .shift()
+    }
+    const eachTaskAll = {
+        [CONSTANTS.I]: i => {
+            result.push(numList[i])
+        },
+        [CONSTANTS['D 1']]: () => {
+            result.splice(
+                result.findIndex(n => n === maxMinNum(result, CONSTANTS.MAX)),
+                1
+            )
+        },
+        [CONSTANTS['D -1']]: () => {
+            result.splice(
+                result.findIndex(n => n === maxMinNum(result, CONSTANTS.MIN)),
+                1
+            )
+        }
+    }
     let result = []
 
-    charList.forEach((v, i) => {
-        switch (v) {
-            case 'I':
-                result.push(numList[i])
-                break
-            case 'D 1':
-                const maxNum = result
-                    .slice()
-                    .sort((a, b) => b - a)
-                    .shift()
-                result.splice(result.findIndex(n => n === maxNum), 1)
-                break
-            case 'D -1':
-                const minNum = result
-                    .slice()
-                    .sort((a, b) => a - b)
-                    .shift()
-                result.splice(result.findIndex(n => n === minNum), 1)
-                break
-        }
-    })
+    charList.forEach((v, i) => eachTaskAll[v](i))
     if (!result.length) result.push(0, 0)
 
     return result
