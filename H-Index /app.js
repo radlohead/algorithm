@@ -15,43 +15,37 @@
 // 이 과학자가 발표한 논문의 수는 5편이고, 그중 3편의 논문은 3회 이상 인용되었습니다. 그리고 나머지 2편의 논문은 3회 이하 인용되었기 때문에 이 과학자의 H-Index는 3입니다.
 
 const app = arr => {
-    const sortList = arr.sort((a, b) => a - b)
-    const bigSmallList = sortList.map((n, i, arr) => {
-        let bigCount = 0
-        let smallCount = 0
+    const bigSmallList = arr
+        .sort((a, b) => a - b)
+        .map((n, i, arr) => {
+            let bigCount = 0
+            let smallCount = 0
 
-        return arr
-            .map((n2, j) => {
-                if (i === j) return
-                if (n >= n2) {
-                    return {
-                        type: 'big',
-                        value: n,
-                        count: ++bigCount
+            return arr
+                .map((n2, j) => {
+                    if (i === j) return
+                    if (n >= n2) {
+                        return {
+                            type: 'big',
+                            value: n,
+                            count: ++bigCount
+                        }
+                    } else {
+                        return {
+                            type: 'small',
+                            value: n2,
+                            count: ++smallCount
+                        }
                     }
-                } else {
-                    return {
-                        type: 'small',
-                        value: n2,
-                        count: ++smallCount
-                    }
-                }
-            })
-            .filter(v => v)
-            .filter((v, i, arr) => {
-                if (v.type === 'big' && v.count === arr.length / 2)
-                    return v.value
-                else if (v.type === 'small' && v.count === arr.length / 2)
-                    return v.value
-            })
-    })
+                })
+                .filter(v => v)
+                .filter(v => v.count === (arr.length - 1) / 2)
+        })
     const result = bigSmallList
         .filter(arr => arr.length === 2)
-        .filter(v => v[0].type === 'big' && v[1].type === 'small')
+        .filter(v => v[0].type !== v[1].type)
         .flat(1)
-        .filter(v => {
-            if (v.type === 'big') return true
-        })[0].value
+        .filter(v => v.type === 'big')[0].value
 
     return result
 }
