@@ -22,29 +22,26 @@
 const app = (n, costs) => {
     const costSortList = costs.slice().sort((a, b) => a[2] - b[2])
     const islandNumList = Array.from(
-        new Set(costs.map(list => list.slice().splice(0, 2)).flat())
+        new Set(costs.map(list => list.slice().splice(0, 2)))
     )
     const queue = new Set()
     let cost = 0
 
     costSortList.forEach(list => {
-        const isBuild = list
-            .slice()
-            .splice(0, 2)
-            .every(n => Array.from(queue).includes(n))
+        const islandList = list.slice().splice(0, 2)
+        const isBuild = islandList.every(n => Array.from(queue).includes(n))
 
         if (queue.size === islandNumList.length) return cost
         if (!queue.size) {
-            queue.add(...list.slice().splice(0, 1))
-            queue.add(...list.slice().splice(1, 2))
+            islandList.forEach(n => queue.add(n))
             cost += list[2]
         } else if (!isBuild) {
-            queue.add(...list.slice().splice(0, 1))
-            queue.add(...list.slice().splice(1, 2))
+            islandList.forEach(n => queue.add(n))
             cost += list[2]
         }
     })
 
+    console.log(queue)
     return cost
 }
 app(4, [[0, 1, 1], [0, 2, 2], [1, 2, 5], [1, 3, 1], [2, 3, 8]]) // 4
