@@ -20,18 +20,11 @@
 const list = arr => {
     if (!arr.length) return ''
     else if (arr.length === 1) return arr[0].name
-    else if (arr.length === 2) {
-        const result = arr.reduce((wrap, obj, i) => {
-            if (i === 1) wrap += ' & '
-            return (wrap += obj.name)
-        }, '')
-        return result
-    } else {
+    else {
         const result = arr.reduce((wrap, obj, i, arr) => {
             if (i !== 0 && i + 2 <= arr.length) wrap += ', '
             else if (i + 1 === arr.length) wrap += ' & '
-            wrap += obj.name
-            return wrap
+            return (wrap += obj.name)
         }, '')
         return result
     }
