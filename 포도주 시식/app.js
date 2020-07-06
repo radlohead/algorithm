@@ -30,19 +30,19 @@
 // 예제 출력 1
 // 33
 
-const app = (n, arr) => {
-    let result = 0
-    const Dp = []
-
-    for (let i = 0; i < 3 && i < n; i++) {
-        if (i == 0) Dp[i] = arr[i]
-        else Dp[i] = arr[i] + arr[i - 1]
-    }
+const solution = (n, arr) => {
+    let result = []
+    const twoSum = arr.map((v, i, arr) => {
+        if (!i) return v
+        return arr[i - 1] + arr[i]
+    })
     for (let i = 3; i < n; i++) {
-        result = Math.max(arr[i] + Dp[i - 2], Dp[i - 1])
-        result = Math.max(result, arr[i] + arr[i - 1] + Dp[i - 3])
-        Dp[i] = result
+        let temp = 0
+        temp = Math.max(arr[i] + twoSum[i - 2], twoSum[i - 1])
+        temp = Math.max(temp, arr[i] + arr[i - 1] + twoSum[i - 3])
+        result.push(temp)
     }
-    return result
+
+    return result.sort((a, b) => b - a)[0]
 }
-app(6, [6, 10, 13, 9, 8, 1])
+solution(6, [6, 10, 13, 9, 8, 1]) // 33
