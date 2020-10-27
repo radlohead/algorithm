@@ -36,4 +36,4 @@ const climbStairs = (n) => {
 
 climbStairs(2) // 2
 climbStairs(3) // 3
-climbStairs(7) // 7
+climbStairs(7) // 21
